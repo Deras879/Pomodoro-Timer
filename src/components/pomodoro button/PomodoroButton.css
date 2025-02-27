@@ -1,0 +1,27 @@
+.pomodoro-button {
+  margin: 0px;
+  border-radius: 4px;
+  border: none;
+  padding: 2px 12px;
+  font-size: 22px;
+  height: 34px;
+  font-family: "Arial Rounded";
+  background: none;
+  cursor: pointer;
+  font-weight: 300;
+  box-shadow: none;
+}
+
+.pomodoro-button-active {
+  margin: 0px;
+  border-radius: 4px;
+  border: none;
+  padding: 2px 12px;
+  font-size: 22px;
+  font-weight: bold;
+  font-family: "Arial Rounded";
+  box-shadow: none;
+  height: 34px;
+  cursor: pointer;
+  background: rgba(0, 0, 0, 0.15);
+}

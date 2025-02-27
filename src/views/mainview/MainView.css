@@ -1,0 +1,50 @@
+.Major-container {
+  margin: 50px auto;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 50vh;
+  justify-content: space-between;
+  max-width: 600px;
+  width: 100%;
+  background-color: rgba(255, 255, 255, 0.1);
+  transition: background-color 0.5s ease-in-out;
+  box-sizing: border-box;
+  border-radius: 15px;
+}
+
+.Buttons {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.start-button {
+  background-color: aliceblue;
+  color: rgb(186, 73, 73);
+  box-shadow: rgb(235, 235, 235) 0px 6px 0px;
+  font-family: "Arial";
+  font-size: 22px;
+  font-weight: bold;
+  width: 200px;
+  height: 55px;
+  border: none;
+  border-radius: 8px;
+}
+
+.start-button:focus {
+  transform: translateY(6px);
+  box-shadow: none;
+}
+
+.extra-buttons {
+  opacity: 0;
+}
+
+.Timer {
+  font-size: 120px;
+  font-weight: bold;
+  font-family: "Arial Rounded";
+}
