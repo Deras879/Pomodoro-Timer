@@ -1,6 +1,7 @@
 import React from "react";
 import "./MainView.css";
 import useTimerStore from "../../zustand/TimerStore";
+import useColorStore from "../../zustand/ColorStore";
 import { useState, useEffect } from "react";
 import PomodoroButton from "../../components/pomodoro button/PomodoroButton";
 
@@ -16,13 +17,34 @@ const MainView = () => {
     setActiveTimer,
   } = useTimerStore();
 
+  const { backgroundClass, setBackgroundClass } = useColorStore();
+
   const [activeButton, setActiveButton] = useState(null);
+
+  useEffect(() => {
+    setActiveButton(1);
+  }, []);
+
+  useEffect(() => {
+    // Cambiar la clase de #root al valor actual de backgroundClass
+    const rootElement = document.getElementById("root");
+    rootElement.className = backgroundClass; // Actualiza la clase
+  }, [backgroundClass]);
 
   const handleButtonClick = (id) => {
     setActiveButton(id);
-    if (id === 1) setActiveTimer("pomoTime");
-    if (id === 2) setActiveTimer("breakTime");
-    if (id === 3) setActiveTimer("longBreakTime");
+    if (id === 1) {
+      setActiveTimer("pomoTime");
+      setBackgroundClass("red");
+    }
+    if (id === 2) {
+      setActiveTimer("breakTime");
+      setBackgroundClass("blue");
+    }
+    if (id === 3) {
+      setActiveTimer("longBreakTime");
+      setBackgroundClass("green");
+    }
   };
 
   useEffect(() => {
@@ -36,6 +58,13 @@ const MainView = () => {
     return () => clearInterval(timer);
   }, [isRunning, decrementTime]);
 
+  useEffect(() => {
+    const startButton = document.getElementById("start-button");
+    if (isRunning == false) startButton.className = "start-button";
+    else {
+      startButton.className = "start-button-active";
+    }
+  }, [isRunning]);
   const handleStart = () => {
     setIsRunning(!isRunning);
   };
@@ -75,7 +104,11 @@ const MainView = () => {
         <div className="Timer">{formatTime(getCurrentTime())}</div>
 
         <div className="Timer-buttons">
-          <button className="start-button" onClick={handleStart}>
+          <button
+            id="start-button"
+            className="start-button"
+            onClick={handleStart}
+          >
             {isRunning ? "PAUSE" : "START"}
           </button>
           <div className="extra-buttons">

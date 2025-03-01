@@ -21,6 +21,13 @@
   width: 100%;
 }
 
+.Timer-buttons {
+  display: flex;
+  position: relative;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
 .start-button {
   background-color: aliceblue;
   color: rgb(186, 73, 73);
@@ -32,15 +39,31 @@
   height: 55px;
   border: none;
   border-radius: 8px;
+  margin-right: 20px;
 }
 
-.start-button:focus {
+.start-button-active {
+  background-color: aliceblue;
+  color: rgb(186, 73, 73);
+  box-shadow: rgb(235, 235, 235) 0px 6px 0px;
+  font-family: "Arial";
+  font-size: 22px;
+  font-weight: bold;
+  width: 200px;
+  height: 55px;
+  border: none;
+  border-radius: 8px;
   transform: translateY(6px);
   box-shadow: none;
 }
 
 .extra-buttons {
-  opacity: 0;
+  display: flex;
+  position: absolute;
+  justify-content: flex-end;
+  opacity: 1;
+  right: 40px;
+  gap: 15px;
 }
 
 .Timer {
