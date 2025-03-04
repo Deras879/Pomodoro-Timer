@@ -1,15 +1,16 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import useTimerStore from "../../zustand/TimerStore";
+import "./Settings.css";
 
 const Settings = () => {
   const {
     setPomoTime,
     setBreakTime,
     setLongBreakTime,
-    pomoTime,
-    breakTime,
-    longBreakTime,
+    pomoTimeCopy,
+    breakTimeCopy,
+    longBreakTimeCopy,
   } = useTimerStore();
 
   const handleChange = (e) => {
@@ -31,49 +32,48 @@ const Settings = () => {
   };
   return (
     <div>
-      <div>
+      <div className="title">
         <h2>Settings</h2>
       </div>
-
-      <div>
-        <h3>Timer</h3>
-      </div>
-      <div>
+      <div className="subtitle">
         <h3>Time(minutes)</h3>
       </div>
       <form action="">
-        <div>
+        <div className="inputs-div">
           <div>
             <label htmlFor="">Pomodoro</label>
             <input
+              className="input"
               onChange={handleChange}
               id="pomodoro"
               type="number"
               step="1"
               min="0"
-              value={pomoTime / 60}
+              value={pomoTimeCopy / 60}
             />
           </div>
           <div>
             <label htmlFor="">Short Break</label>
             <input
+              className="input"
               onChange={handleChange}
               type="number"
               id="break"
               step="1"
               min="0"
-              value={breakTime / 60}
+              value={breakTimeCopy / 60}
             />
           </div>
           <div>
             <label htmlFor="">Long Break</label>
             <input
+              className="input"
               onChange={handleChange}
               type="number"
               id="longBreak"
               step="1"
               min="0"
-              value={longBreakTime / 60}
+              value={longBreakTimeCopy / 60}
             />
           </div>
         </div>

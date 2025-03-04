@@ -55,6 +55,16 @@
   margin-right: 20px;
   transform: translateY(6px);
 }
+
+.extra-buttons-active {
+  display: flex;
+  position: absolute;
+  justify-content: flex-end;
+  opacity: 0;
+  right: 40px;
+  gap: 15px;
+}
+
 .extra-buttons {
   display: flex;
   position: absolute;
@@ -68,4 +78,19 @@
   font-size: 120px;
   font-weight: bold;
   font-family: "Arial Rounded";
+}
+
+.iconRestart {
+  width: 20px;
+}
+
+.restart {
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgb(255, 255, 255);
+  color: rgb(58, 58, 58);
+  /* font-family: "Arial Rounded"; */
+  font-size: 19px;
 }

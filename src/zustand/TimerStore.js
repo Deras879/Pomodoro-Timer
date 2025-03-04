@@ -2,13 +2,19 @@ import { create } from "zustand";
 
 const useTimerStore = create((set) => ({
   pomoTime: 1500, // 25 minutos en segundos
+  pomoTimeCopy: 1500, // 25 minutos en segundos
   breakTime: 300,
+  breakTimeCopy: 300,
   longBreakTime: 900,
+  longBreakTimeCopy: 900,
   isRunning: false,
   activeTimer: "pomoTime",
-  setPomoTime: (newTime) => set({ pomoTime: newTime * 60 }),
-  setBreakTime: (newTime) => set({ breakTime: newTime * 60 }),
-  setLongBreakTime: (newTime) => set({ longBreakTime: newTime * 60 }),
+  setPomoTime: (newTime) =>
+    set({ pomoTime: newTime * 60, pomoTimeCopy: newTime * 60 }),
+  setBreakTime: (newTime) =>
+    set({ breakTime: newTime * 60, breakTimeCopy: newTime * 60 }),
+  setLongBreakTime: (newTime) =>
+    set({ longBreakTime: newTime * 60, longBreakTimeCopy: newTime * 60 }),
   setIsRunning: (running) => set({ isRunning: running }),
   setActiveTimer: (timer) => set({ activeTimer: timer }),
 

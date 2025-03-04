@@ -3,14 +3,20 @@ import "./MainView.css";
 import useTimerStore from "../../zustand/TimerStore";
 import useColorStore from "../../zustand/ColorStore";
 import { useState, useEffect } from "react";
-import Settings from "../../components/settingscomponent/Settings";
+import iconRestart from "../../assets/iconRestart.svg";
 import PomodoroButton from "../../components/pomodoro button/PomodoroButton";
 
 const MainView = () => {
   const {
     pomoTime,
+    pomoTimeCopy,
     breakTime,
+    breakTimeCopy,
+    longBreakTimeCopy,
     longBreakTime,
+    setPomoTime,
+    setBreakTime,
+    setLongBreakTime,
     activeTimer,
     isRunning,
     setIsRunning,
@@ -33,6 +39,18 @@ const MainView = () => {
   }, [backgroundClass]);
 
   const handleButtonClick = (id) => {
+    if (isRunning) {
+      setIsRunning(false);
+
+      setTimeout(() => {
+        continueExecution(id);
+      }, 300);
+    } else {
+      continueExecution(id);
+    }
+  };
+
+  const continueExecution = (id) => {
     setActiveButton(id);
     if (id === 1) {
       setActiveTimer("pomoTime");
@@ -61,9 +79,13 @@ const MainView = () => {
 
   useEffect(() => {
     const startButton = document.getElementById("start-button");
-    if (isRunning == false) startButton.className = "start-button";
-    else {
+    const restartButton = document.getElementById("restart-button");
+    if (isRunning == false) {
+      startButton.className = "start-button";
+      restartButton.className = "extra-buttons";
+    } else {
       startButton.className = "start-button-active";
+      restartButton.className = "extra-buttons-active";
     }
   }, [isRunning]);
   const handleStart = () => {
@@ -80,6 +102,23 @@ const MainView = () => {
     if (activeTimer === "breakTime") return breakTime;
     if (activeTimer === "longBreakTime") return longBreakTime;
     return 0;
+  };
+
+  const handleRestart = () => {
+    switch (activeTimer) {
+      case "pomoTime":
+        setPomoTime(pomoTimeCopy / 60);
+        break;
+      case "breakTime":
+        setBreakTime(breakTimeCopy / 60);
+        break;
+      case "longBreakTime":
+        setLongBreakTime(longBreakTimeCopy / 60);
+        break;
+
+      default:
+        break;
+    }
   };
 
   return (
@@ -112,8 +151,11 @@ const MainView = () => {
           >
             {isRunning ? "PAUSE" : "START"}
           </button>
-          <div className="extra-buttons">
-            <button>restart</button>
+          <div id="restart-button" className="extra-buttons">
+            <button className="restart" onClick={handleRestart}>
+              <img src={iconRestart} className="iconRestart" alt="" />
+              Restart
+            </button>
           </div>
         </div>
       </div>
