@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import "./Navbar.css";
 import Settings from "../settingscomponent/Settings";
+import iconSettings from "../../assets/iconSettings.svg";
 
 const Navbar = () => {
   const [showSettings, setShowSettings] = useState(false);
@@ -10,9 +11,11 @@ const Navbar = () => {
       <div>
         <h3>PomoTimer</h3>
       </div>
-      <div>
-        <button onClick={() => setShowSettings(true)}>Settings</button>
-        <button>Login</button>
+      <div className="settings-buttons">
+        <button className="settings" onClick={() => setShowSettings(true)}>
+          <img src={iconSettings} alt="Icon" className="icon" />
+          Settings
+        </button>
       </div>
 
       {/* Pop-up modal */}
