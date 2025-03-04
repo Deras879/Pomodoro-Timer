@@ -3,6 +3,7 @@ import "./MainView.css";
 import useTimerStore from "../../zustand/TimerStore";
 import useColorStore from "../../zustand/ColorStore";
 import { useState, useEffect } from "react";
+import Settings from "../../components/settingscomponent/Settings";
 import PomodoroButton from "../../components/pomodoro button/PomodoroButton";
 
 const MainView = () => {
@@ -112,7 +113,6 @@ const MainView = () => {
             {isRunning ? "PAUSE" : "START"}
           </button>
           <div className="extra-buttons">
-            <button>next</button>
             <button>restart</button>
           </div>
         </div>

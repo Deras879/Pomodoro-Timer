@@ -6,9 +6,9 @@ const useTimerStore = create((set) => ({
   longBreakTime: 900,
   isRunning: false,
   activeTimer: "pomoTime",
-  setPomoTime: (newTime) => set({ pomoTime: newTime }),
-  setBreakTime: (newTime) => set({ breakTime: newTime }),
-  setLongBreakTime: (newTime) => set({ longBreakTime: newTime }),
+  setPomoTime: (newTime) => set({ pomoTime: newTime * 60 }),
+  setBreakTime: (newTime) => set({ breakTime: newTime * 60 }),
+  setLongBreakTime: (newTime) => set({ longBreakTime: newTime * 60 }),
   setIsRunning: (running) => set({ isRunning: running }),
   setActiveTimer: (timer) => set({ activeTimer: timer }),
 
