@@ -8,6 +8,7 @@ const useTimerStore = create((set) => ({
   longBreakTime: 900,
   longBreakTimeCopy: 900,
   isRunning: false,
+  timerEnded: false,
   activeTimer: "pomoTime",
   setPomoTime: (newTime) =>
     set({ pomoTime: newTime * 60, pomoTimeCopy: newTime * 60 }),
@@ -16,6 +17,7 @@ const useTimerStore = create((set) => ({
   setLongBreakTime: (newTime) =>
     set({ longBreakTime: newTime * 60, longBreakTimeCopy: newTime * 60 }),
   setIsRunning: (running) => set({ isRunning: running }),
+  setTimerEnded: (status) => set({ timerEnded: status }),
   setActiveTimer: (timer) => set({ activeTimer: timer }),
 
   decrementTime: () =>
@@ -35,6 +37,7 @@ const useTimerStore = create((set) => ({
         updatedTimers.longBreakTime -= 1;
       } else {
         updatedTimers.isRunning = false; // Si llega a 0, detener el timer
+        updatedTimers.timerEnded = true; // Si llega a 0, detener el timer
       }
 
       return updatedTimers;

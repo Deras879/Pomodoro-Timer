@@ -8,6 +8,9 @@ import ProgressBar from "../../components/ProgressBar/ProgressBar";
 import PomodoroButton from "../../components/pomodoro button/PomodoroButton";
 import SwitchOn from "../../assets/Sounds/Switch on.mp3";
 import SwitchOff from "../../assets/Sounds/Switch off.mp3";
+import Restart from "../../assets/Sounds/Restart.mp3";
+import SlideSound from "../../assets/Sounds/Slide.mp3";
+import TimeOut from "../../assets/Sounds/TimeOut.mp3";
 
 const MainView = () => {
   const {
@@ -22,6 +25,8 @@ const MainView = () => {
     setLongBreakTime,
     activeTimer,
     isRunning,
+    timerEnded,
+    setTimerEnded,
     setIsRunning,
     decrementTime,
     setActiveTimer,
@@ -46,9 +51,11 @@ const MainView = () => {
       setIsRunning(false);
 
       setTimeout(() => {
+        playSound(SlideSound);
         continueExecution(id);
       }, 300);
     } else {
+      playSound(SlideSound);
       continueExecution(id);
     }
   };
@@ -76,9 +83,18 @@ const MainView = () => {
         decrementTime();
       }, 1000);
     }
-
     return () => clearInterval(timer);
   }, [isRunning, decrementTime]);
+
+  useEffect(() => {
+    if (!isRunning && timerEnded) {
+      playSound(TimeOut);
+      setTimeout(() => {
+        window.alert("Tiempo Finalizado");
+      }, 1000);
+      setTimerEnded(false);
+    }
+  }, [isRunning, timerEnded]);
 
   useEffect(() => {
     const startButton = document.getElementById("start-button");
@@ -138,6 +154,7 @@ const MainView = () => {
   };
 
   const handleRestart = () => {
+    playSound(Restart);
     switch (activeTimer) {
       case "pomoTime":
         setPomoTime(pomoTimeCopy / 60);
