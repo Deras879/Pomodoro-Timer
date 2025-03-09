@@ -4,7 +4,10 @@ import useTimerStore from "../../zustand/TimerStore";
 import useColorStore from "../../zustand/ColorStore";
 import { useState, useEffect } from "react";
 import iconRestart from "../../assets/iconRestart.svg";
+import ProgressBar from "../../components/ProgressBar/ProgressBar";
 import PomodoroButton from "../../components/pomodoro button/PomodoroButton";
+import SwitchOn from "../../assets/Sounds/Switch on.mp3";
+import SwitchOff from "../../assets/Sounds/Switch off.mp3";
 
 const MainView = () => {
   const {
@@ -89,6 +92,11 @@ const MainView = () => {
     }
   }, [isRunning]);
   const handleStart = () => {
+    if (isRunning) {
+      playSound(SwitchOff);
+    } else {
+      playSound(SwitchOn);
+    }
     setIsRunning(!isRunning);
   };
   const formatTime = (seconds) => {
@@ -97,6 +105,31 @@ const MainView = () => {
     return `${minutes}:${secs < 10 ? "0" : ""}${secs}`;
   };
 
+  const getMaxTime = () => {
+    switch (activeTimer) {
+      case "pomoTime":
+        return pomoTimeCopy;
+      case "breakTime":
+        return breakTimeCopy;
+      case "longBreakTime":
+        return longBreakTimeCopy;
+      default:
+        return 0;
+    }
+  };
+
+  const getCurrentColor = () => {
+    switch (backgroundClass) {
+      case "red":
+        return "#ff6b6b";
+      case "blue":
+        return "#4dabf7";
+      case "green":
+        return "#69db7c";
+      default:
+        return "#4dabf7";
+    }
+  };
   const getCurrentTime = () => {
     if (activeTimer === "pomoTime") return pomoTime;
     if (activeTimer === "breakTime") return breakTime;
@@ -121,8 +154,20 @@ const MainView = () => {
     }
   };
 
+  const playSound = (soundFile) => {
+    const audio = new Audio(soundFile);
+    audio.play().catch((error) => {
+      console.error("Error al reproducir el sonido:", error);
+    });
+  };
+
   return (
     <div>
+      <ProgressBar
+        currentTime={getCurrentTime()}
+        maxTime={getMaxTime()}
+        color={getCurrentColor()}
+      ></ProgressBar>
       <div className="Major-container">
         <div className="Buttons">
           <PomodoroButton
